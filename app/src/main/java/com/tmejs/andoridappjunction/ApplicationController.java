@@ -118,6 +118,32 @@ public class ApplicationController {
 
     }
 
+    public static void startNewRound() {
+        switchAppToWaitingMode();
+
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
+            @Override
+            public Object request() {
+                //TODO wysłać odpowiedni (domain) obiekt do web.
+                Gson gson = new Gson();
+                Player player = new Player();
+                player.id = Long.getLong(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
+                String jsonRepresentation = gson.toJson(player);
+//                Log.e("jsoning", jsonRepresentation);
+                try {
+                    return TCPUtil.sendRequest(jsonRepresentation);
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(Object params) {
+                GameWrapper.analyzeStartNewRoundResponse(params);
+            }
+        }));
+    }
+
     public interface AfterActivityChanged {
         void afterActivityChanged();
     }

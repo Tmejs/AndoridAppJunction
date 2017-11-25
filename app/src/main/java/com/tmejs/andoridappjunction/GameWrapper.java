@@ -1,11 +1,13 @@
 package com.tmejs.andoridappjunction;
 
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.tmejs.andoridappjunction.activities.AdminJoinGameActivity;
+import com.tmejs.andoridappjunction.activities.PlayersInfoActivity;
 import com.tmejs.andoridappjunction.activities.StartGameActivity;
 import com.tmejs.andoridappjunction.activities.StartingGameActivity;
 import com.tmejs.andoridappjunction.domain.Competition;
@@ -56,11 +58,27 @@ public class GameWrapper {
     public static void analyzePlayersStatusResponse(Object params) {
         Gson gson = new Gson();
         //TODO tutaj trzeba zmienić typ domenowy
-        List<Player> players = gson.fromJson((String) params,new TypeToken<List<Player>>(){}.getType());
+        final List<Player> players = gson.fromJson((String) params,new TypeToken<List<Player>>(){}.getType());
 
         if(players!=null){
-//            ApplicationController.switchActivity()
+            ApplicationController.switchActivity(PlayersInfoActivity.class, new ApplicationController.AfterActivityChanged() {
+                @Override
+                public void afterActivityChanged() {
+
+                    //TODO uzupełnić danymi
+                    ApplicationController.VIEWS_CONTROLLER.setListInTable(R.id.players_info_activity_players_table,players,new ArrayList<Pair<String, String>>(){{
+                        add(new Pair<String, String>("nick","NICK"));
+                        add(new Pair<String, String>("initialBillAmount","Started as"));
+
+                    }});
+                }
+            });
         }
 
+    }
+
+    public static void analyzeStartNewRoundResponse(Object params) {
+        //TODO przełązcenie na activity odpowiedzialne za daną grę.
+        //TODO dorobienie odpowiedniego obiktu domenowego
     }
 }
