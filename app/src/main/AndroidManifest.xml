@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tmejs.andoridappjunction">
 
@@ -9,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -20,10 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartGameActivity"
+            android:name=".activities.StartGameActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".StartingGameActivity" />
+        <activity android:name=".activities.StartingGameActivity" />
+        <activity android:name=".activities.system.WaitingActivity"></activity>
     </application>
+
 </manifest>

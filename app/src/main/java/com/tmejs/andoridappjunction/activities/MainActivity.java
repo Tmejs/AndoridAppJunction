@@ -1,15 +1,20 @@
-package com.tmejs.andoridappjunction;
+package com.tmejs.andoridappjunction.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.tmejs.andoridappjunction.ApplicationController;
+import com.tmejs.andoridappjunction.R;
+import com.tmejs.andoridappjunction.activities.system.MyActivity;
+
+public class MainActivity extends MyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ApplicationController.init(this);
     }
 
 
@@ -22,20 +27,12 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(3000);
-                    switchActivity();
+                    ApplicationController.switchActivity(StartGameActivity.class);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
-
-
-    private void switchActivity(){
-        Intent newIntent = new Intent(this, StartGameActivity.class);
-        this.startActivity(newIntent);
-    }
-
-
 }
 
