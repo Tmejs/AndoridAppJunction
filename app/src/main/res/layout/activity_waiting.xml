@@ -6,24 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.tmejs.andoridappjunction.activities.system.WaitingActivity">
 
-    <LinearLayout
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/myProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7"
-            android:src="@drawable/waiting" />
+            android:text="@string/WAITING_FOR_PLAYERS"
+            android:background="@android:color/transparent" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.LinearLayoutCompat>
