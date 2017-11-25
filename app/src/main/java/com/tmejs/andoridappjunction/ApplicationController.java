@@ -7,10 +7,16 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
 import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
+import com.tmejs.andoridappjunction.domain.Competition;
+import com.tmejs.andoridappjunction.domain.Player;
 import com.tmejs.andoridappjunction.usables.MyAsyncTask;
 import com.tmejs.andoridappjunction.utils.TCPUtil;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -367,16 +373,21 @@ public class ApplicationController {
     public static void startTestGame() {
         switchAppToWaitingMode();
 
+        final Competition comp = new Competition();
+        comp.admin = new Player();
+        comp.admin.avatarId = Long.getLong("1");
+        comp.admin.name = "Mati";
+        comp.numberOfPlayers = 5;
+
+
         ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent<String>() {
             @Override
             public String request() {
-
+                Gson gson = new Gson();
+                String jsonRepresentation = gson.toJson(comp);
+                Log.e("jsoning", jsonRepresentation);
                 try {
-                    return TCPUtil.sendRequest(new ArrayList<Pair<String, String>>() {
-                        {
-                            add(new Pair<String, String>("Parametr", "Wartość"));
-                        }
-                    });
+                    return TCPUtil.sendRequest(jsonRepresentation);
                 } catch (IOException e) {
                     return "";
                 }
@@ -401,14 +412,17 @@ public class ApplicationController {
 
     }
 
-    public static void joinUserToGame(Integer avatarId, String login, Double valueToPay) {
+    public static void joinUserToGame(Competition comp) {
         switchAppToWaitingMode();
 
         ArrayList<Pair<String, String>> list = new ArrayList<>();
 
         String response;
         try {
-            response = TCPUtil.sendRequest(list);
+            Gson gson = new Gson();
+            String jsonRepresentation = gson.toJson(comp);
+            Log.e("jsoning", jsonRepresentation);
+            response = TCPUtil.sendRequest(jsonRepresentation);
         } catch (IOException e) {
             //Tutaj jakas lipa, chyba najlepiej zakmnąć apkę.
 

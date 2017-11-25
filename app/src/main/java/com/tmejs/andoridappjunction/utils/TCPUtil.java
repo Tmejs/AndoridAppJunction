@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
 public class TCPUtil {
 
 
-    private static String sendPostRequest(List<Pair<String, String>> request) throws IOException {
+    private static String sendPostRequest(String json) throws IOException {
 
         String url = "http://" +AppParams.WEB_SERWER_ADDRESS + AppParams.INCOMING_SERVLET_PATH;
         Log.e("dasdasdasd",url);
@@ -35,55 +36,53 @@ public class TCPUtil {
 
 
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Accept-Language", "en-US,en");
-//        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        con.setReadTimeout(10000);
-        con.setConnectTimeout(15000);
+
+
+
+        String line;
+        StringBuffer jsonString = new StringBuffer();
+
+        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         con.setRequestMethod("POST");
         con.setDoInput(true);
-        con.setDoOutput(true);
-        //Generating params based on incomed list
-        String params = createParamsString(request);
-        Log.e("writing",url);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(params);
-        wr.flush();
-        wr.close();
+        con.setInstanceFollowRedirects(false);
+        con.connect();
+        OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+        writer.write(json);
 
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-
-        return response.toString();
-    }
-
-
-    private static String createParamsString(List<Pair<String, String>> params) {
-        String paramsString = "";
-        for (Pair<String, String> pair : params) {
-            if (!paramsString.isEmpty()) {
-                paramsString = paramsString.concat(AppParams.HTTP_PARAM_DELIMETER);
-            } else {
-                paramsString = paramsString.concat(pair.first);
-                paramsString = paramsString.concat("=");
-                paramsString = paramsString.concat(pair.second);
+        writer.close();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            while((line = br.readLine()) != null){
+                jsonString.append(line);
             }
+            br.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return paramsString;
-    }
+        con.disconnect();
+        return jsonString.toString();
 
-    public static String sendRequest(List<Pair<String, String>> params) throws IOException {
+    }
+//
+//
+//    private static String createParamsString(List<Pair<String, String>> params) {
+//        String paramsString = "";
+//        for (Pair<String, String> pair : params) {
+//            if (!paramsString.isEmpty()) {
+//                paramsString = paramsString.concat(AppParams.HTTP_PARAM_DELIMETER);
+//            } else {
+//                paramsString = paramsString.concat(pair.first);
+//                paramsString = paramsString.concat("=");
+//                paramsString = paramsString.concat(pair.second);
+//            }
+//        }
+//        return paramsString;
+//    }
+
+    public static String sendRequest(String json) throws IOException {
         Log.e(TCPUtil.class.toString(),"sendRequest()");
-        return sendPostRequest(params);
+        return sendPostRequest(json);
     }
 
 }
