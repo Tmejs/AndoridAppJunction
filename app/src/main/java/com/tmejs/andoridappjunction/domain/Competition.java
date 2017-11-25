@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  */
 
 public class Competition {
+    public Integer compId;
     public Player admin;
     public BigDecimal totalBill;
     public Boolean fixedShare;

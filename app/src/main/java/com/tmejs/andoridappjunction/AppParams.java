@@ -10,6 +10,7 @@ import java.util.Map;
  */
 
 public class AppParams {
+
     private static AppParams instance;
 
 
@@ -33,6 +34,11 @@ public class AppParams {
     public final static String WEB_SERWER_ADDRESS="10.100.48.165:8080/game/";
     public final static String INCOMING_SERVLET_PATH="";
     public final static String HTTP_PARAM_DELIMETER="&";
+
+
+    //Names for params
+    public final static String COMPETITION_ID="COMPETITION_ID";
+    public static final String PLAYER_ID = "PLAYER_ID";
 
 
 
