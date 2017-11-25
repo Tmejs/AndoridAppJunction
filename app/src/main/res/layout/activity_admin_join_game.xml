@@ -11,6 +11,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/logo2" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -23,15 +31,33 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Game code:" />
+                android:text="Game code:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textSize="22sp"
+                android:typeface="sans" />
 
             <TextView
                 android:id="@+id/admin_join_game_game_code_text_view"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:editable="false" />
+                android:editable="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="@color/colorAccent"
+                android:textSize="23sp"
+                android:textStyle="bold|italic"
+                android:typeface="sans" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:text="Give above game code to your friends."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,18 +65,20 @@
             android:layout_weight="2">
 
             <Button
-                android:id="@+id/admin_join_game_start_game_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Start Game"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/starting_game_start_game_button"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="14sp"
+                android:text="Start game"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="186dp" />
         </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>

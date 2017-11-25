@@ -22,14 +22,22 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Nick" />
+                android:text="Nick"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/starting_game_nick_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Mati" />
+                android:lineSpacingExtra="14sp"
+                android:text="Mati"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textStyle="italic"
+                android:typeface="sans" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,7 +51,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Bill Expanse:" />
+                android:text="Bill Expanse:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/starting_game_bill_expane"
@@ -51,7 +61,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="numberDecimal"
-                android:text="100" />
+                android:text="100"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +78,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Count of players" />
+                android:text="Count of players"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/starting_game_couunt_of_players"
@@ -74,7 +89,9 @@
                 android:layout_weight="1"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                android:text="5" />
+                android:text="5"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +105,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Rounds count:" />
+                android:text="Rounds count:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/starting_game_count_of_rounds"
@@ -97,7 +116,9 @@
                 android:layout_weight="1"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                android:text="5" />
+                android:text="5"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +132,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Equal split?" />
+                android:text="Equal split?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/starting_game_equal_spli_switch"
@@ -119,10 +142,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:checked="true"
-                android:gravity="left|center_vertical"
-                android:switchMinWidth="100dp"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:switchMinWidth="150dp"
+                android:textAlignment="center"
                 android:textOff=""
-                android:textOn="" />
+                android:textOn=""
+                tools:checked="false"
+                tools:paddingLeft="2dp" />
 
         </LinearLayout>
 
@@ -138,7 +164,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Your expanse:" />
+                android:text="Your expanse:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/starting_game_personal_expanse"
@@ -147,7 +175,9 @@
                 android:layout_weight="1"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                android:text="20" />
+                android:text="20"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
         <LinearLayout
@@ -161,7 +191,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:text="Start game" />
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="14sp"
+                android:text="Start game"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
         </LinearLayout>
 
     </LinearLayout>
