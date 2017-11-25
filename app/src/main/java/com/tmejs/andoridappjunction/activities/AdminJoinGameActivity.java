@@ -15,7 +15,7 @@ public class AdminJoinGameActivity extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_join_game);
 
-        ApplicationController.VIEWS_CONTROLLER.setText(R.id.admin_join_game_game_code_text_view,ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID));
+        ApplicationController.VIEWS_CONTROLLER.setText(R.id.admin_join_game_game_code_text_view, ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID));
 
         ApplicationController.VIEWS_CONTROLLER.setOnClickListener(R.id.admin_join_game_start_game_button, new View.OnClickListener() {
             @Override
@@ -26,8 +26,7 @@ public class AdminJoinGameActivity extends MyActivity {
     }
 
 
-
-    private void startGame(){
+    private void startGame() {
         ApplicationController.waitForAllPlayersToSignIn();
     }
 }

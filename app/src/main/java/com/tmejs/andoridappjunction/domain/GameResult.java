@@ -5,7 +5,6 @@ package com.tmejs.andoridappjunction.domain;
  */
 
 public class GameResult {
-
     public Integer uerId;
     public Object response;
     public long time;
