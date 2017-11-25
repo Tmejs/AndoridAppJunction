@@ -8,8 +8,13 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,6 +45,56 @@ public class ViewsController {
     }
 
 
+    public Boolean setCheckedStateChangedEvent(Integer viewId, CompoundButton.OnCheckedChangeListener event){
+        View view = ApplicationController.getCurrentActivity().findViewById(viewId);
+        //MRZAD 03.08.2017
+        //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
+        if (view == null) return null;
+        else
+        {
+            if ((!(view instanceof CompoundButton))) return null;
+            else {
+                 ((CompoundButton) view).setOnCheckedChangeListener(event);
+                 return true;
+            }
+        }
+
+
+    }
+
+    public Boolean getIsChecked(Integer viewId) {
+
+
+        View view = ApplicationController.getCurrentActivity().findViewById(viewId);
+        //MRZAD 03.08.2017
+        //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
+        if (view == null) return null;
+        else
+        {
+            if ((!(view instanceof Checkable))) return null;
+            else {
+                return ((Checkable) view).isChecked();
+            }
+        }
+    }
+
+    public void setCheckedStatus(Integer id, boolean checkedStatus) {
+
+
+        View view = ApplicationController.getCurrentActivity().findViewById(id);
+        //MRZAD 03.08.2017
+        //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
+        if (view == null);
+        else
+        {
+            if ((!(view instanceof Checkable)));
+            else {
+                ((Checkable) view).setChecked(checkedStatus);
+            }
+        }
+    }
+
+
     public interface OnClickListener<T> {
         void onClick(T object);
     }
@@ -60,7 +115,6 @@ public class ViewsController {
         //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
         if (view == null) return null;
         else
-
         {
             if (!(view instanceof TextView)) return null;
             else {
@@ -68,6 +122,19 @@ public class ViewsController {
             }
         }
 
+    }
+
+
+    public static Boolean setOnClickListener(Integer viewId,View.OnClickListener listener){
+        View view = ApplicationController.getCurrentActivity().findViewById(viewId);
+        //MRZAD 03.08.2017
+        //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
+        if (view == null) return false;
+        else
+        {
+            view.setOnClickListener(listener);
+            return true;
+        }
     }
 
     public <T> void setListInFlexBox(Integer id, List<T> list, List<Pair<String, String>> columnsList, final OnClickListener<T> myOnClick) {
