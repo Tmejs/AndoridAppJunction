@@ -58,5 +58,9 @@ public class GameWrapper {
         //TODO tutaj trzeba zmienić typ domenowy
         List<Player> players = gson.fromJson((String) params,new TypeToken<List<Player>>(){}.getType());
 
+        if(players!=null){
+//            ApplicationController.switchActivity()
+        }
+
     }
 }
