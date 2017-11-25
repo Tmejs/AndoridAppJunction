@@ -13,7 +13,7 @@ public abstract class AbstarctGameActivity<ResultType,GameDomain> extends MyActi
     @Override
     protected void onResume() {
         super.onResume();
-        responseTime=System.nanoTime();
+        responseTime=System.currentTimeMillis();
     }
 
     public abstract void fillData(GameDomain gamObject);

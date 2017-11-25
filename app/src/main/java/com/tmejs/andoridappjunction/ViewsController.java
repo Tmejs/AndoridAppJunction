@@ -5,12 +5,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.Nullable;
+import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -90,6 +92,20 @@ public class ViewsController {
             if ((!(view instanceof Checkable)));
             else {
                 ((Checkable) view).setChecked(checkedStatus);
+            }
+        }
+    }
+
+    public void setTextChangeEvent(Integer viewId,TextWatcher textWatcher) {
+View view = ApplicationController.getCurrentActivity().findViewById(viewId);
+        //MRZAD 03.08.2017
+        //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
+        if (view == null);
+        else
+        {
+            if ((!(view instanceof EditText)));
+            else {
+                ((EditText) view).addTextChangedListener(textWatcher);
             }
         }
     }
@@ -419,7 +435,6 @@ public class ViewsController {
                         ((TextView) view).setText(text);
                     }
                 });
-
                 return true;
             }
         } else {
@@ -487,15 +502,11 @@ public class ViewsController {
         }
     }
 
-    public Boolean setVisible(Integer id, Boolean isVisible) {
+    public Boolean setVisible(Integer id, int visible) {
         View view = ApplicationController.getCurrentActivity().findViewById(id);
 
         if (view != null) {
-            if (isVisible)
-                view.setVisibility(View.VISIBLE);
-            else
-                view.setVisibility(View.INVISIBLE);
-
+            view.setVisibility(visible);
             return true;
         } else {
             return false;

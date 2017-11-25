@@ -17,7 +17,7 @@ public class StartGameActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
-        ((Button)findViewById(R.id.activity_start_game_start_game_button)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.activity_start_game_start_game_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("StartGameActivity", "Start game button clicked");
@@ -26,19 +26,14 @@ public class StartGameActivity extends MyActivity {
 
             }
         });
-        ((Button)findViewById(R.id.activity_start_game_join_game_button)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.activity_start_game_join_game_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("StartGameActivity", "Join game button clicked");
-//                ApplicationController.startTestGame();
-
+                ApplicationController.switchActivity(JoinGameActivity.class);
             }
         });
     }
-
-
-
-
 
 
 }

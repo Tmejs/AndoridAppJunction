@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tmejs.andoridappjunction.activities.JoinGameActivity;
 import com.tmejs.andoridappjunction.activities.StartingGameActivity;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
 import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
 import com.tmejs.andoridappjunction.domain.AdminSignedIn;
+import com.tmejs.andoridappjunction.domain.AskDoGameExist;
+import com.tmejs.andoridappjunction.domain.AskDoGameExistResponse;
 import com.tmejs.andoridappjunction.domain.Competition;
 import com.tmejs.andoridappjunction.domain.GameResult;
 import com.tmejs.andoridappjunction.domain.Player;
@@ -206,6 +209,35 @@ public class ApplicationController {
             @Override
             public void postRequest(Object params) {
                 GameWrapper.analyzePlayersStatusResponse(params);
+            }
+        }));
+    }
+
+    public static void askDoGameExist(final String text) {
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
+            @Override
+            public Object request() {
+                Gson gson = new Gson();
+                AskDoGameExist doGameExist = new AskDoGameExist();
+                doGameExist.gameId = new Integer(text);
+
+                String jsonRepresentation = gson.toJson(doGameExist);
+                try {
+                    return TCPUtil.sendRequest(AppParams.HTTP_PROTOCOL_PREFIX + AppParams.WEB_SERWER_ADDRESS + AppParams.WEB_ASK_GAME_SERVLET_ADDRESS , jsonRepresentation);
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(Object params) {
+                Activity curAct= ApplicationController.getCurrentActivity();
+                Gson gson = new Gson();
+                AskDoGameExistResponse resp = gson.fromJson((String)params,AskDoGameExistResponse.class);
+                //Sprawdzenie czy cały czas jesteśmy w danym activity
+                if(curAct.getClass().getCanonicalName().equalsIgnoreCase(JoinGameActivity.class.getClass().getCanonicalName())){
+                    ((JoinGameActivity)curAct).setValidationResult(resp);
+                }
             }
         }));
     }

@@ -11,8 +11,6 @@ public class WaitingActivity extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
-//        WebView web = (WebView) findViewById(R.id.webView);
-//        web.setBackgroundColor(Color.TRANSPARENT); //for gif without background
-//        web.loadUrl("http://media.giphy.com/media/88EvfARM1YaCQ/giphy.gif");
+
     }
 }

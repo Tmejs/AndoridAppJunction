@@ -36,7 +36,12 @@ public class StartingGameActivity extends MyActivity {
     }
 
     private void setIsEqualSplit(Boolean isEqualSplit){
-        ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.starting_game_personal_expanse_layout,!isEqualSplit);
+        if(isEqualSplit){
+            ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.starting_game_personal_expanse_layout,View.GONE);
+        }else{
+            ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.starting_game_personal_expanse_layout,View.VISIBLE);
+        }
+
     }
 
 
