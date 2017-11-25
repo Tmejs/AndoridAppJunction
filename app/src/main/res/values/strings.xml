@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndoridAppJunction</string>
+    <string name="start_game_activity_start_game_button_text">Start game</string>
+    <string name="start_game_activity_join_game_button_text">Join</string>
+</resources>
