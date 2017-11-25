@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.tmejs.andoridappjunction.ApplicationController;
 import com.tmejs.andoridappjunction.R;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
+import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
 
 public class StartGameActivity extends MyActivity {
 
@@ -29,7 +30,7 @@ public class StartGameActivity extends MyActivity {
             @Override
             public void onClick(View v) {
                 Log.e("StartGameActivity", "Join game button clicked");
-                ApplicationController.showNews("Powinienem zmienić na JoiningGameActivity");
+                ApplicationController.startTestGame();
 
             }
         });

@@ -8,6 +8,7 @@
  */
 package com.tmejs.andoridappjunction.utils;
 
+import android.util.Log;
 import android.util.Pair;
 
 import com.tmejs.andoridappjunction.AppParams;
@@ -28,23 +29,24 @@ public class TCPUtil {
 
     private static String sendPostRequest(List<Pair<String, String>> request) throws IOException {
 
-        String url = "http://" + AppParams.INCOMING_SERVLET_PATH;
-
+        String url = "http://" +AppParams.WEB_SERWER_ADDRESS + AppParams.INCOMING_SERVLET_PATH;
+        Log.e("dasdasdasd",url);
         URL obj = new URL(url);
 
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         //add reuqest header
         con.setRequestMethod("POST");
         con.setRequestProperty("Accept-Language", "en-US,en");
-
+//        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        con.setReadTimeout(10000);
+        con.setConnectTimeout(15000);
+        con.setRequestMethod("POST");
+        con.setDoInput(true);
+        con.setDoOutput(true);
         //Generating params based on incomed list
         String params = createParamsString(request);
-
-        //System.out.println(urlParameters); 
-        // Send post request
-        con.setDoOutput(true);
-
+        Log.e("writing",url);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(params);
         wr.flush();
@@ -80,6 +82,7 @@ public class TCPUtil {
     }
 
     public static String sendRequest(List<Pair<String, String>> params) throws IOException {
+        Log.e(TCPUtil.class.toString(),"sendRequest()");
         return sendPostRequest(params);
     }
 

@@ -30,7 +30,8 @@ public class AppParams {
      * "public Object MIEJSCE;"
      */
 
-    public final static String INCOMING_SERVLET_PATH="localhost:8080/WebTest/NewServlet";
+    public final static String WEB_SERWER_ADDRESS="10.100.26.51:8080/WebTest";
+    public final static String INCOMING_SERVLET_PATH="/NewServlet";
     public final static String HTTP_PARAM_DELIMETER="&";
 
 

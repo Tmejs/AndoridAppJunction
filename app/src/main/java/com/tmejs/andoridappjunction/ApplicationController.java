@@ -8,11 +8,13 @@ import android.util.Pair;
 import android.widget.Toast;
 
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
+import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
 import com.tmejs.andoridappjunction.usables.MyAsyncTask;
 import com.tmejs.andoridappjunction.utils.TCPUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tmejs on 25.11.2017.
@@ -24,6 +26,7 @@ public class ApplicationController {
     public static AppParams APP_PARAMS;
     private static ApplicationController appController;
     public static AsyncHelper ASYNC_HELPER;
+    public static ViewsController VIEWS_CONTROLLER = ViewsController.getInstance();
 
 
     public ApplicationController getInstance() {
@@ -356,7 +359,35 @@ public class ApplicationController {
             ApplicationController.APP_PARAMS = AppParams.getInstance(startActivity.getSharedPreferences(AppParams.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE));
     }
 
-    private void switchAppToWaitingMode() {
+    private static void switchAppToWaitingMode() {
+        ApplicationController.switchActivity(WaitingActivity.class);
+    }
+
+
+    public static void startTestGame() {
+        switchAppToWaitingMode();
+
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent<String>() {
+            @Override
+            public String request() {
+
+                try {
+                    return TCPUtil.sendRequest(new ArrayList<Pair<String, String>>() {
+                        {
+                            add(new Pair<String, String>("Parametr", "Wartość"));
+                        }
+                    });
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(String params) {
+                GameWrapper.anaylzeResponse(params);
+            }
+        }));
+
 
     }
 
@@ -370,7 +401,7 @@ public class ApplicationController {
 
     }
 
-    public void joinUserToGame(Integer avatarId, String login, Double valueToPay) {
+    public static void joinUserToGame(Integer avatarId, String login, Double valueToPay) {
         switchAppToWaitingMode();
 
         ArrayList<Pair<String, String>> list = new ArrayList<>();
