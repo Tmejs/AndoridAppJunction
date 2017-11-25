@@ -42,9 +42,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:editable="false"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="@color/colorAccent"
-                android:textSize="23sp"
+                android:textSize="30sp"
                 android:textStyle="bold|italic"
                 android:typeface="sans" />
         </LinearLayout>
@@ -65,7 +66,7 @@
             android:layout_weight="2">
 
             <Button
-                android:id="@+id/starting_game_start_game_button"
+                android:id="@+id/admin_join_game_start_game_button"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:layout_margin="5dp"
@@ -77,8 +78,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:typeface="serif"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="186dp" />
+                />
         </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>

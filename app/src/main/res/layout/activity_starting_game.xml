@@ -36,6 +36,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="24sp"
                 android:textStyle="italic"
                 android:typeface="sans" />
         </LinearLayout>
@@ -64,7 +65,7 @@
                 android:text="100"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="14sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +92,8 @@
                 android:inputType="numberDecimal"
                 android:text="5"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,7 +120,8 @@
                 android:inputType="numberDecimal"
                 android:text="5"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -156,7 +159,8 @@
             android:id="@+id/starting_game_personal_expanse_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView"
@@ -177,7 +181,8 @@
                 android:inputType="numberDecimal"
                 android:text="20"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
