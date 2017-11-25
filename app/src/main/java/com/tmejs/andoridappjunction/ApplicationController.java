@@ -13,6 +13,7 @@ import com.tmejs.andoridappjunction.activities.StartingGameActivity;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
 import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
 import com.tmejs.andoridappjunction.domain.Competition;
+import com.tmejs.andoridappjunction.domain.GameResult;
 import com.tmejs.andoridappjunction.domain.Player;
 import com.tmejs.andoridappjunction.domain.StartGame;
 import com.tmejs.andoridappjunction.usables.MyAsyncTask;
@@ -140,6 +141,61 @@ public class ApplicationController {
             @Override
             public void postRequest(Object params) {
                 GameWrapper.analyzeStartNewRoundResponse(params);
+            }
+        }));
+    }
+
+    public static void sendGameResult(final Integer result, final long resultTime) {
+        switchAppToWaitingMode();
+
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
+            @Override
+            public Object request() {
+                //TODO wysłać odpowiedni (domain) obiekt do web.
+                Gson gson = new Gson();
+                GameResult gaeResult = new GameResult();
+                gaeResult.response=result;
+                gaeResult.time=resultTime;
+                gaeResult.uerId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
+                String jsonRepresentation = gson.toJson(gaeResult);
+                try {
+                    return TCPUtil.sendRequest(jsonRepresentation);
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(Object params) {
+                GameWrapper.analyzePlayersStatusResponse(params);
+            }
+        }));
+    }
+
+
+    public static void sendGameResult(final String result, final long resultTime) {
+        switchAppToWaitingMode();
+
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
+            @Override
+            public Object request() {
+                //TODO wysłać odpowiedni (domain) obiekt do web.
+                Gson gson = new Gson();
+                GameResult gaeResult = new GameResult();
+                gaeResult.response=result;
+                gaeResult.time=resultTime;
+                gaeResult.uerId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
+                String jsonRepresentation = gson.toJson(gaeResult);
+                try {
+                    return TCPUtil.sendRequest(jsonRepresentation);
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(Object params) {
+                GameWrapper.analyzePlayersStatusResponse(params);
             }
         }));
     }

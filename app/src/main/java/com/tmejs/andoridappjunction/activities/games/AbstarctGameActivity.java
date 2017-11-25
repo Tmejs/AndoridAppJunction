@@ -6,10 +6,16 @@ import com.tmejs.andoridappjunction.activities.system.MyActivity;
  * Created by Tmejs on 25.11.2017.
  */
 
-public abstract class AbstarctGameActivity<T> extends MyActivity {
+public abstract class AbstarctGameActivity<ResultType,GameDomain> extends MyActivity {
 
-    public abstract void fillData(Object gamObject);
-    public abstract void submit(T result);
+    public long responseTime;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        responseTime=System.nanoTime();
+    }
 
+    public abstract void fillData(GameDomain gamObject);
+    public abstract void submit(ResultType result);
 }

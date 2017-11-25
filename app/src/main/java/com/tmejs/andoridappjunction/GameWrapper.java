@@ -71,6 +71,9 @@ public class GameWrapper {
                         add(new Pair<String, String>("initialBillAmount","Started as"));
 
                     }});
+
+                    //sprawdzenie czy kolejna runda?
+
                 }
             });
         }
