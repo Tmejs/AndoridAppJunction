@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="249dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/logo" />
+            android:src="@drawable/logo" />
 
         <Button
             android:id="@+id/activity_start_game_start_game_button"
