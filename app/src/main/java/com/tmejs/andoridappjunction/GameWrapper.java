@@ -36,12 +36,12 @@ public class GameWrapper {
 
             try {
                 Gson gson = new Gson();
-                //TODO tutaj pyknąć jakąś domenową klasę
                 Competition comp = gson.fromJson((String) params, Competition.class);
 
 
-                if (comp.compId != null) {
-                    ApplicationController.APP_PARAMS.setParamValue(AppParams.COMPETITION_ID,comp.compId);
+                if (comp.competitionId != null) {
+                    ApplicationController.APP_PARAMS.setParamValue(AppParams.COMPETITION_ID,comp.competitionId);
+                    ApplicationController.APP_PARAMS.setParamValue(AppParams.PLAYER_ID,comp.currentPlayer.id);
                     ApplicationController.switchActivity(AdminJoinGameActivity.class);
                     return;
                 }

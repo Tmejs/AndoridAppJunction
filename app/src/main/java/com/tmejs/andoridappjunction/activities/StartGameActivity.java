@@ -30,7 +30,7 @@ public class StartGameActivity extends MyActivity {
             @Override
             public void onClick(View v) {
                 Log.e("StartGameActivity", "Join game button clicked");
-                ApplicationController.startTestGame();
+//                ApplicationController.startTestGame();
 
             }
         });

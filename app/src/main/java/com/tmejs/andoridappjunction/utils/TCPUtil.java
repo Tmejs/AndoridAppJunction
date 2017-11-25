@@ -27,42 +27,40 @@ import java.util.List;
  */
 public class TCPUtil {
 
+private static String sendPostRequest(String url,String json) throws IOException{
+    URL obj = new URL(url);
+    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    String line;
+    StringBuffer jsonString = new StringBuffer();
+
+    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+    con.setRequestMethod("POST");
+    con.setDoInput(true);
+    con.setInstanceFollowRedirects(false);
+    con.connect();
+    OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
+    if(json!=null) {
+        if(!json.isEmpty())
+            writer.write(json);
+    }
+
+    writer.close();
+    try {
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        while((line = br.readLine()) != null){
+            jsonString.append(line);
+        }
+        br.close();
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    con.disconnect();
+    return jsonString.toString();
+
+}
 
     private static String sendPostRequest(String json) throws IOException {
-
-        String url = "http://" +AppParams.WEB_SERWER_ADDRESS + AppParams.INCOMING_SERVLET_PATH;
-        Log.e("dasdasdasd",url);
-        URL obj = new URL(url);
-
-
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-
-
-        String line;
-        StringBuffer jsonString = new StringBuffer();
-
-        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        con.setRequestMethod("POST");
-        con.setDoInput(true);
-        con.setInstanceFollowRedirects(false);
-        con.connect();
-        OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream(), "UTF-8");
-        writer.write(json);
-
-        writer.close();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            while((line = br.readLine()) != null){
-                jsonString.append(line);
-            }
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        con.disconnect();
-        return jsonString.toString();
-
+        return sendPostRequest("http://" +AppParams.WEB_SERWER_ADDRESS + AppParams.INCOMING_SERVLET_PATH,json);
     }
 //
 //
@@ -83,6 +81,11 @@ public class TCPUtil {
     public static String sendRequest(String json) throws IOException {
         Log.e(TCPUtil.class.toString(),"sendRequest()");
         return sendPostRequest(json);
+    }
+
+    public static String sendRequest(String url,String json) throws IOException {
+        Log.e(TCPUtil.class.toString(),"sendRequest("+url+","+json);
+        return sendPostRequest(url,json);
     }
 
 }

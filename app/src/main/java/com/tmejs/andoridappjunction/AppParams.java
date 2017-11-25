@@ -11,6 +11,9 @@ import java.util.Map;
 
 public class AppParams {
 
+    public static final String JOIN_SERVICE_NAME = "/join";
+    public static final String INIITIAL_PLAYER_AMOUNT = "INIITIAL_PLAYER_AMOUNT";
+    public static final String PLAYER_NAME = "PLAYER_NAME";
     private static AppParams instance;
 
 
@@ -30,7 +33,7 @@ public class AppParams {
      * Każdy parametr typu Object
      * "public Object MIEJSCE;"
      */
-
+    public final static String HTTP_PROTOCOL_PREFIX="http://";
     public final static String WEB_SERWER_ADDRESS="10.100.48.165:8080/game/";
     public final static String INCOMING_SERVLET_PATH="";
     public final static String HTTP_PARAM_DELIMETER="&";
@@ -173,4 +176,5 @@ public class AppParams {
         sharedPreferences.edit().clear().commit();
 
     }
+
 }

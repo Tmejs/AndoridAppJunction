@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 
 public class Player {
         public Long id;
-        public BigDecimal initialBillAmount;
+        public Long initialBillAmount;
         public String name;
         public Long avatarId;
+        public Long score;
+        public BigDecimal finalBillAmount;
 }

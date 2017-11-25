@@ -7,12 +7,11 @@ package com.tmejs.andoridappjunction.domain;
 public class StartGame {
     public Integer gameId;
     public Integer avatarId;
-    public String nick;
-    public Integer roundCount;
+    public Player player;
+    public Integer numberOfRounds;
     public Boolean equalSplit;
-    public Integer playersCount;
-    public Integer personalPayment;
-    public Integer sumPayment;
+    public Integer numberOfPlayers;
+    public Long totalBill;
     //feature
 //    public Integer ratio;
 }

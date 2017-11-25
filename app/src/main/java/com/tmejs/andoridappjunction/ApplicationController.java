@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.tmejs.andoridappjunction.activities.StartingGameActivity;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
 import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
+import com.tmejs.andoridappjunction.domain.AdminSignedIn;
 import com.tmejs.andoridappjunction.domain.Competition;
 import com.tmejs.andoridappjunction.domain.GameResult;
 import com.tmejs.andoridappjunction.domain.Player;
@@ -69,12 +70,15 @@ public class ApplicationController {
     public static void startNewGame(final StartGame startGameObject) {
         switchAppToWaitingMode();
 
+        ApplicationController.APP_PARAMS.setParamValue(AppParams.INIITIAL_PLAYER_AMOUNT,startGameObject.player.initialBillAmount);
+        ApplicationController.APP_PARAMS.setParamValue(AppParams.PLAYER_NAME,startGameObject.player.name);
+
         ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
             @Override
             public Object request() {
                 Gson gson = new Gson();
                 String jsonRepresentation = gson.toJson(startGameObject);
-//                Log.e("jsoning", jsonRepresentation);
+                Log.e("jsoning", jsonRepresentation);
                 try {
                     return TCPUtil.sendRequest(jsonRepresentation);
                 } catch (IOException e) {
@@ -84,8 +88,7 @@ public class ApplicationController {
 
             @Override
             public void postRequest(Object params) {
-                //TODO sprawdzić czy poprawnie zwrocił id gry.
-//                if()
+                 Log.e("PostRequest starting gagme:",(String)params);
                 GameWrapper.analyzeStartGameResponse(params);
 
             }
@@ -101,12 +104,19 @@ public class ApplicationController {
             public Object request() {
                 Gson gson = new Gson();
                 Player player = new Player();
-                player.id = Long.getLong(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
-                String jsonRepresentation = gson.toJson(player);
-//                Log.e("jsoning", jsonRepresentation);
+                player.name= ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_NAME);
+
                 try {
-                    return TCPUtil.sendRequest(jsonRepresentation);
+                    player.initialBillAmount=new Long(ApplicationController.APP_PARAMS.getParamValue(AppParams.INIITIAL_PLAYER_AMOUNT));
+                } catch (NumberFormatException e) {
+                    Log.e("waitForAllPlayersToSignIn()","Jakis blasd",e);
+                }
+
+                String jsonString = gson.toJson(player);
+                try {
+                    return TCPUtil.sendRequest(AppParams.HTTP_PROTOCOL_PREFIX+AppParams.WEB_SERWER_ADDRESS+ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID)+AppParams.JOIN_SERVICE_NAME,jsonString);
                 } catch (IOException e) {
+                    Log.e("waitForAllPlayersToSignIn()","Jakis blasd",e);
                     return "";
                 }
             }
@@ -499,37 +509,37 @@ public class ApplicationController {
     }
 
 
-    public static void startTestGame() {
-        switchAppToWaitingMode();
-
-        final Competition comp = new Competition();
-        comp.admin = new Player();
-        comp.admin.avatarId = Long.getLong("1");
-        comp.admin.name = "Mati";
-        comp.numberOfPlayers = 5;
-
-
-        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent<String>() {
-            @Override
-            public String request() {
-                Gson gson = new Gson();
-                String jsonRepresentation = gson.toJson(comp);
-                Log.e("jsoning", jsonRepresentation);
-                try {
-                    return TCPUtil.sendRequest(jsonRepresentation);
-                } catch (IOException e) {
-                    return "";
-                }
-            }
-
-            @Override
-            public void postRequest(String params) {
-                GameWrapper.anaylzeResponse(params);
-            }
-        }));
-
-
-    }
+//    public static void startTestGame() {
+//        switchAppToWaitingMode();
+//
+//        final Competition comp = new Competition();
+//        comp.admin = new Player();
+//        comp.admin.avatarId = Long.getLong("1");
+//        comp.admin.name = "Mati";
+//        comp.numberOfPlayers = 5;
+//
+//
+//        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent<String>() {
+//            @Override
+//            public String request() {
+//                Gson gson = new Gson();
+//                String jsonRepresentation = gson.toJson(comp);
+//                Log.e("jsoning", jsonRepresentation);
+//                try {
+//                    return TCPUtil.sendRequest(jsonRepresentation);
+//                } catch (IOException e) {
+//                    return "";
+//                }
+//            }
+//
+//            @Override
+//            public void postRequest(String params) {
+//                GameWrapper.anaylzeResponse(params);
+//            }
+//        }));
+//
+//
+//    }
 
     public void sendGameResponse(String response, Integer time) {
 
@@ -553,7 +563,7 @@ public class ApplicationController {
             Log.e("jsoning", jsonRepresentation);
             response = TCPUtil.sendRequest(jsonRepresentation);
         } catch (IOException e) {
-            //Tutaj jakas lipa, chyba najlepiej zakmnąć apkę.
+//            Lon
 
         }
 
