@@ -2,4 +2,12 @@
     <string name="app_name">AndoridAppJunction</string>
     <string name="start_game_activity_start_game_button_text">Start game</string>
     <string name="start_game_activity_join_game_button_text">Join</string>
+    <string name="INSERT_CORRECT_DATA">Insert correct data</string>
+    <string name="WRONG_PERSONAL_PAYMET">Insert correct personal expand</string>
+    <string name="TO_SMALL_PLAYERS_COUNT">To low players number</string>
+    <string name="TO_BIG_PLAYERS_COUNT">To many players</string>
+    <string name="TO_LOW_ROUNDS_NUMBER">To low rounds number</string>
+    <string name="TO_BIG_ROUNDS_NUMBER">To high rounds count</string>
+    <string name="TO_LOW_SUM_PAYMENT">To low bill expanse</string>
+    <string name="ERROR_WHEN_STARTING_GAME">Error while starting new game</string>
 </resources>

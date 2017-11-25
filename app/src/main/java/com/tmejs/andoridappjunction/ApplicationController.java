@@ -5,13 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tmejs.andoridappjunction.activities.StartingGameActivity;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
 import com.tmejs.andoridappjunction.activities.system.WaitingActivity;
 import com.tmejs.andoridappjunction.domain.Competition;
 import com.tmejs.andoridappjunction.domain.Player;
+import com.tmejs.andoridappjunction.domain.StartGame;
 import com.tmejs.andoridappjunction.usables.MyAsyncTask;
 import com.tmejs.andoridappjunction.utils.TCPUtil;
 
@@ -62,6 +65,33 @@ public class ApplicationController {
         return getCurrentActivity().getResources().getResourceEntryName(viewId);
     }
 
+    public static void startNewGame(final StartGame startGameObject) {
+        switchAppToWaitingMode();
+
+        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
+            @Override
+            public Object request() {
+                Gson gson = new Gson();
+                String jsonRepresentation = gson.toJson(startGameObject);
+//                Log.e("jsoning", jsonRepresentation);
+                try {
+                    return TCPUtil.sendRequest(jsonRepresentation);
+                } catch (IOException e) {
+                    return "";
+                }
+            }
+
+            @Override
+            public void postRequest(Object params) {
+                //TODO sprawdzić czy poprawnie zwrocił id gry.
+//                if()
+                GameWrapper.analyzeStartGameResponse(params);
+
+            }
+        }));
+
+    }
+
     public interface AfterActivityChanged {
         void afterActivityChanged();
     }
@@ -98,6 +128,7 @@ public class ApplicationController {
     public static String getStringFromResources(Integer stringId) {
         return getCurrentActivity().getResources().getString(stringId);
     }
+
 
     public interface OnMinimalizeEvent {
         /**
@@ -300,8 +331,6 @@ public class ApplicationController {
         Intent newIntent = new Intent(getCurrentActivity(), activityClass);
         getCurrentActivity().startActivity(newIntent);
         return true;
-
-
     }
 
 
@@ -346,14 +375,6 @@ public class ApplicationController {
     }
 
 
-    /**
-     * Zgłoszenie z pobocznego threadu że padł Socket.
-     */
-    public static void onSocketListenerChanged() {
-        //Nowe zgłoszenie przywitania
-        //TODO
-//        ASYNC_HELPER.sendAsyncLogicRequestWithDestination(WelcomeLogic.class, AwsController.getWelcomServletConnection(), null, null, null);
-    }
 
     /**
      * Inicjalizacja parametrów aplikacji na podstawie SharedPreferences podanego Activity
