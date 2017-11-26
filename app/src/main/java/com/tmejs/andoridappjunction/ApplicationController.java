@@ -165,47 +165,18 @@ public class ApplicationController {
         }));
     }
 
-    public static void sendGameResult(final Integer result, final long resultTime) {
-        switchAppToWaitingMode();
-
-        ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
-            @Override
-            public Object request() {
-                //TODO wysłać odpowiedni (domain) obiekt do web.
-                Gson gson = new Gson();
-                GameResult gaeResult = new GameResult();
-                gaeResult.response=result;
-                gaeResult.time=resultTime;
-                gaeResult.uerId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
-                String jsonRepresentation = gson.toJson(gaeResult);
-                try {
-                    return TCPUtil.sendRequest(jsonRepresentation);
-                } catch (IOException e) {
-                    Log.e("postRequest()","Jakis blad",e);
-                    return "";
-                }
-            }
-
-            @Override
-            public void postRequest(Object params) {
-                GameWrapper.analyzePlayersStatusResponse(params);
-            }
-        }));
-    }
-
-
     public static void sendGameResult(final String result, final long resultTime) {
         switchAppToWaitingMode();
 
         ApplicationController.ASYNC_HELPER.executeAsync(new MyAsyncTask(new MyAsyncTask.RequestEvent() {
             @Override
             public Object request() {
-                //TODO wysłać odpowiedni (domain) obiekt do web.
+
                 Gson gson = new Gson();
                 GameResult gaeResult = new GameResult();
                 gaeResult.response=result;
                 gaeResult.time=resultTime;
-                gaeResult.uerId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
+                gaeResult.userId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
                 String jsonRepresentation = gson.toJson(gaeResult);
                 try {
                     return TCPUtil.sendRequest(AppParams.HTTP_PROTOCOL_PREFIX + AppParams.WEB_SERWER_ADDRESS +ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID) +AppParams.GET_RESULT_SERLET_PATH,jsonRepresentation);

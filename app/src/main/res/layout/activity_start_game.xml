@@ -28,12 +28,12 @@
             android:layout_margin="11dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/start_game_activity_start_game_button_text"
             android:backgroundTint="@color/colorPrimary"
             android:elevation="0dp"
             android:lineSpacingExtra="8sp"
+            android:text="@string/start_game_activity_start_game_button_text"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:typeface="monospace" />
 
@@ -48,7 +48,7 @@
             android:elevation="0dp"
             android:text="@string/start_game_activity_join_game_button_text"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:typeface="monospace" />
 
     </LinearLayout>

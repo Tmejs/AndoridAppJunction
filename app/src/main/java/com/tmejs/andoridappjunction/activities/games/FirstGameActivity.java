@@ -50,7 +50,7 @@ public class FirstGameActivity extends AbstarctGameActivity<String, FirstGameDom
 
     @Override
     public void submit(String result) {
-        long resultTime = responseTime - System.currentTimeMillis();
+        long resultTime = System.currentTimeMillis()-responseTime ;
         ApplicationController.sendGameResult(result, resultTime);
     }
 }
