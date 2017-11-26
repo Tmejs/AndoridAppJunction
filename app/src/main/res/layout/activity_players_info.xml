@@ -12,12 +12,24 @@
         android:orientation="vertical"
        >
 
+        <TextView
+            android:id="@+id/players_info_activity_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="24sp" />
+
         <TableLayout
             android:id="@+id/players_info_activity_players_table"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4">
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </TableLayout>
 
         <android.support.constraint.ConstraintLayout

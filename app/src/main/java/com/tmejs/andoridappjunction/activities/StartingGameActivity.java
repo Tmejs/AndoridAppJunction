@@ -80,7 +80,7 @@ public class StartingGameActivity extends MyActivity {
                 }
             }
 
-            if(params.numberOfPlayers <3){
+            if(params.numberOfPlayers <2){
                 ApplicationController.showNews(ApplicationController.getStringFromResources(R.string.TO_SMALL_PLAYERS_COUNT));
                 return;
             }else if(params.numberOfPlayers >10){

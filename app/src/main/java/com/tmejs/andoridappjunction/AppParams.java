@@ -37,6 +37,7 @@ public class AppParams {
     public final static String WEB_SERWER_ADDRESS="10.100.48.165:8080/game/";
     public final static String WEB_ASK_GAME_SERVLET_ADDRESS="ask";
     public final static String INCOMING_SERVLET_PATH="";
+    public final static String GET_NEW_GAME_SERVLET_PATH="/selectMinigame";
     public final static String HTTP_PARAM_DELIMETER="&";
 
 

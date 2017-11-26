@@ -10,5 +10,7 @@
     <string name="TO_BIG_ROUNDS_NUMBER">To high rounds count</string>
     <string name="TO_LOW_SUM_PAYMENT">To low bill expanse</string>
     <string name="ERROR_WHEN_STARTING_GAME">Error while starting new game</string>
-    <string name="WAITING_FOR_PLAYERS">Waiting for players to join the game</string>
+    <string name="WAITING_FOR_PLAYERS">Waiting for other players to join the game</string>
+    <string name="TXT_INSERT_CORRECT_NICKAME">Insert correct nick</string>
+    <string name="TXT_WRONG_GAME_NUMBER">Wrong gaame code</string>
 </resources>

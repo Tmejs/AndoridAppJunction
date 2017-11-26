@@ -65,9 +65,7 @@ public class ViewsController {
     }
 
     public Boolean getIsChecked(Integer viewId) {
-
-
-        View view = ApplicationController.getCurrentActivity().findViewById(viewId);
+     View view = ApplicationController.getCurrentActivity().findViewById(viewId);
         //MRZAD 03.08.2017
         //Rzutowanie na TextView bo wszystkie kontrolki które oprogramowałem dziedziczył po TextView
         if (view == null) return null;
@@ -286,11 +284,6 @@ View view = ApplicationController.getCurrentActivity().findViewById(viewId);
         tl.removeAllViews();
         tl.setStretchAllColumns(true);
 
-//        TableRow mr = new TableRow(ApplicationController.getCurrentActivity().getApplicationContext());
-//        mr.addView(new TextView(ApplicationController.getCurrentActivity().getApplicationContext()));
-//        mr.setLayoutParams(new TableLayout.LayoutParams(0, 5, 1));
-//        mr.setBackgroundColor(Color.BLACK);
-
         //Utworzenie headerów z kolumn
         TableRow tr = new TableRow(ApplicationController.getCurrentActivity().getApplicationContext());
 
@@ -318,7 +311,6 @@ View view = ApplicationController.getCurrentActivity().findViewById(viewId);
         if (list.isEmpty()) {
             return;
         } else {
-
             // Pobieramy liste fieldów
             Field[] fields = list.get(0).getClass().getFields();
             ArrayList<Field> finalList = new ArrayList<>();

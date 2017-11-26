@@ -69,6 +69,7 @@ public class AsyncHelper {
 
 
     public void executeOnUi(Runnable runnable) {
+
         if (handler != null) handler.post(runnable);
     }
 

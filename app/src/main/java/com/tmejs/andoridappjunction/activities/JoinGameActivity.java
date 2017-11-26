@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
+import com.tmejs.andoridappjunction.AppParams;
 import com.tmejs.andoridappjunction.ApplicationController;
 import com.tmejs.andoridappjunction.R;
 import com.tmejs.andoridappjunction.activities.system.MyActivity;
@@ -40,9 +42,9 @@ public class JoinGameActivity extends MyActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if(s.length()>0){
+                    if (s.length() > 0) {
                         setTestButtonEnable(true);
-                    }else{
+                    } else {
                         setTestButtonEnable(false);
                     }
                 }
@@ -55,10 +57,30 @@ public class JoinGameActivity extends MyActivity {
                 ApplicationController.askDoGameExist(ApplicationController.VIEWS_CONTROLLER.getText(R.id.starting_game_game_code_edit_text));
             }
         });
+
+
+        ApplicationController.VIEWS_CONTROLLER.setOnClickListener(R.id.join_game_start_game_button, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nick = ApplicationController.VIEWS_CONTROLLER.getText(R.id.join_game_nick_text_view);
+                if (nick == null || nick.isEmpty()) {
+                    ApplicationController.showNews(ApplicationController.getStringFromResources(R.string.TXT_INSERT_CORRECT_NICKAME));
+                } else {
+                    ApplicationController.APP_PARAMS.setParamValue(AppParams.PLAYER_NAME, nick);
+                    try {
+                        String initialBillAmount = ApplicationController.VIEWS_CONTROLLER.getText(R.id.join_game_starting_expanse);
+                        ApplicationController.APP_PARAMS.setParamValue(AppParams.INIITIAL_PLAYER_AMOUNT, initialBillAmount);
+                    } catch (Exception e) {
+
+                    }
+                    ApplicationController.waitForAllPlayersToSignIn();
+                }
+            }
+        });
     }
 
     private void setTestButtonEnable(boolean b) {
-        ApplicationController.VIEWS_CONTROLLER.setEnabled(R.id.join_game_test_button,b);
+        ApplicationController.VIEWS_CONTROLLER.setEnabled(R.id.join_game_test_button, b);
     }
 
 
@@ -74,20 +96,25 @@ public class JoinGameActivity extends MyActivity {
     }
 
     public void setValidationResult(final AskDoGameExistResponse resp) {
-
-
         ApplicationController.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(resp.doExist) {
-                    if(resp.doInputInitialBill){
-                        ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.join_game_personal_expanse_layout,View.VISIBLE);
-                    }else{
-                        ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.join_game_personal_expanse_layout,View.GONE);
+                if (resp.doExist) {
+                    Log.e("zz", "doExst true");
+                    if (resp.doInputInitialBill != null) {
+                        if (resp.doInputInitialBill) {
+                            Log.e("zz", "doInputInitialBill  true");
+                            ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.join_game_personal_expanse_layout, View.VISIBLE);
+                        } else {
+                            Log.e("zz", "doInputInitialBill false");
+                            ApplicationController.VIEWS_CONTROLLER.setVisible(R.id.join_game_personal_expanse_layout, View.GONE);
+                        }
                     }
                     setVisibilitiesBasedOnAuthentication(true);
 
-                }else{
+                } else {
+                    Log.e("zz", "doExst false");
+                    ApplicationController.showNews(ApplicationController.getStringFromResources(R.string.TXT_WRONG_GAME_NUMBER));
                     setVisibilitiesBasedOnAuthentication(false);
                 }
             }

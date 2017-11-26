@@ -10,7 +10,6 @@ public class Player {
         public Long id;
         public Long initialBillAmount;
         public String name;
-        public Long avatarId;
-        public Long score;
-        public BigDecimal finalBillAmount;
+        public String initialPercentage;
+        public String finalPercentage;
 }

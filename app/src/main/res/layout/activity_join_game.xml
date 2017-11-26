@@ -149,6 +149,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:backgroundTint="@color/colorPrimary"
                 android:elevation="0dp"
+                android:enabled="false"
                 android:lineSpacingExtra="8sp"
                 android:text="JOIN GAME"
                 android:textColor="@android:color/background_light"
