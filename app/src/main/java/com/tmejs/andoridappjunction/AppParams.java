@@ -14,6 +14,7 @@ public class AppParams {
     public static final String JOIN_SERVICE_NAME = "/join";
     public static final String INIITIAL_PLAYER_AMOUNT = "INIITIAL_PLAYER_AMOUNT";
     public static final String PLAYER_NAME = "PLAYER_NAME";
+    public static final String GET_RESULT_SERLET_PATH = "/result";
     private static AppParams instance;
 
 

@@ -23,7 +23,7 @@ public class FirstGameActivity extends AbstarctGameActivity<String, FirstGameDom
 
         fillGameQuestion(gamObject.question);
 
-        fillTextFields(gamObject.possibleAnswer);
+        fillTextFields(gamObject.possibleAnswerList);
     }
 
     private void fillGameQuestion(String question) {

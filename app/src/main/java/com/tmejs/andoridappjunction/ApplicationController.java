@@ -152,12 +152,14 @@ public class ApplicationController {
                 try {
                     return TCPUtil.sendRequest( AppParams.HTTP_PROTOCOL_PREFIX + AppParams.WEB_SERWER_ADDRESS +ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID) +AppParams.GET_NEW_GAME_SERVLET_PATH ,jsonRepresentation);
                 } catch (IOException e) {
+                    Log.e("startNewRound()","Jakis blasd",e);
                     return "";
                 }
             }
 
             @Override
             public void postRequest(Object params) {
+                Log.e("postRequest()",(String)params);
                 GameWrapper.analyzeStartNewRoundResponse(params);
             }
         }));
@@ -179,6 +181,7 @@ public class ApplicationController {
                 try {
                     return TCPUtil.sendRequest(jsonRepresentation);
                 } catch (IOException e) {
+                    Log.e("postRequest()","Jakis blad",e);
                     return "";
                 }
             }
@@ -205,8 +208,9 @@ public class ApplicationController {
                 gaeResult.uerId = new Integer(ApplicationController.APP_PARAMS.getParamValue(AppParams.PLAYER_ID));
                 String jsonRepresentation = gson.toJson(gaeResult);
                 try {
-                    return TCPUtil.sendRequest(jsonRepresentation);
+                    return TCPUtil.sendRequest(AppParams.HTTP_PROTOCOL_PREFIX + AppParams.WEB_SERWER_ADDRESS +ApplicationController.APP_PARAMS.getParamValue(AppParams.COMPETITION_ID) +AppParams.GET_RESULT_SERLET_PATH,jsonRepresentation);
                 } catch (IOException e) {
+                    Log.e("sendGameResult()","Jakis blad",e);
                     return "";
                 }
             }

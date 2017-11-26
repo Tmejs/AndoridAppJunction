@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                android:text="5"
+                android:text="2"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="24sp" />
@@ -118,7 +118,7 @@
                 android:layout_weight="1"
                 android:digits="0123456789."
                 android:inputType="numberDecimal"
-                android:text="5"
+                android:text="2"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="24sp" />

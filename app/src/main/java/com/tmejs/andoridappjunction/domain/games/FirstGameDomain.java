@@ -11,6 +11,6 @@ import java.util.List;
 public class FirstGameDomain extends AbstractGame {
 
     public String question;
-    public List<String> possibleAnswer;
+    public List<String> possibleAnswerList;
 
 }

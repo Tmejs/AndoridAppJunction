@@ -12,9 +12,11 @@ import com.tmejs.andoridappjunction.activities.MainActivity;
 import com.tmejs.andoridappjunction.activities.PlayersInfoActivity;
 import com.tmejs.andoridappjunction.activities.StartGameActivity;
 import com.tmejs.andoridappjunction.activities.StartingGameActivity;
+import com.tmejs.andoridappjunction.activities.games.FirstGameActivity;
 import com.tmejs.andoridappjunction.domain.Competition;
 import com.tmejs.andoridappjunction.domain.Player;
 import com.tmejs.andoridappjunction.domain.WaitingForOtherPLayersResponse;
+import com.tmejs.andoridappjunction.domain.games.FirstGameDomain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +77,6 @@ public class GameWrapper {
 
     public static void analyzePlayersStatusResponse(Object params) {
         Gson gson = new Gson();
-
         final WaitingForOtherPLayersResponse response = gson.fromJson((String) params, WaitingForOtherPLayersResponse.class);
         if (response.responsePlayers != null) {
             ApplicationController.switchActivity(PlayersInfoActivity.class, new ApplicationController.AfterActivityChanged() {
@@ -84,9 +85,9 @@ public class GameWrapper {
                     //Ustawieie listy  graczy
                     ApplicationController.VIEWS_CONTROLLER.setListInTable(R.id.players_info_activity_players_table, response.responsePlayers, new ArrayList<Pair<String, String>>() {{
                         add(new Pair<String, String>("name", "NICK"));
-                        add(new Pair<String, String>("initialBillAmount", "To Pay"));
-                        add(new Pair<String, String>("initialPercentage", "Started as"));
-                        add(new Pair<String, String>("finalPercentage", "Current"));
+                        add(new Pair<String, String>("initialBillAmount", "To pay at start"));
+                        add(new Pair<String, String>("initialPercentage", "Start % of bill"));
+                        add(new Pair<String, String>("finalPercentage", "Current % of bill"));
                     }});
 
                     //Czy kolejna runda?
@@ -116,7 +117,13 @@ public class GameWrapper {
     }
 
     public static void analyzeStartNewRoundResponse(Object params) {
-        //TODO przełązcenie na activity odpowiedzialne za daną grę.
-        //TODO dorobienie odpowiedniego obiktu domenowego
+        Gson gson =new Gson();
+        final FirstGameDomain firstGame = gson.fromJson((String) params, FirstGameDomain.class);
+        ApplicationController.switchActivity(FirstGameActivity.class, new ApplicationController.AfterActivityChanged() {
+            @Override
+            public void afterActivityChanged() {
+                ((FirstGameActivity)ApplicationController.getCurrentActivity()).fillData(firstGame);
+            }
+        });
     }
 }
